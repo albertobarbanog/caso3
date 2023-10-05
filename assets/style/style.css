@@ -1,0 +1,59 @@
+.formulario {
+    background-color: #F5F5F5 ;
+}
+nav {
+    background-color: #E8E7E2
+}
+
+/*Cambio de botones principal y secundarrio (del modal)*/
+.bg-primary {
+    background-color: #A9A8A2 !important;
+}
+
+.btn-primary {
+    background-color: #A9A8A2 !important;
+}
+
+.bg-secondary {
+    background-color: #A9A8A2 !important;
+}
+
+.btn-secondary {
+    background-color: #f4f4f0 !important;
+}
+
+button:hover {
+    background-color: #C8C7C2 !important;
+}
+button {
+    border: 0 !important;
+    color: black !important;
+}
+
+/*esto es para cambiar los colores y las sombras al checkear una casilla*/
+input[type=checkbox]:checked{
+    background-color: #A9A8A2;
+    box-shadow: 0 0 0 0.2rem #E8E7E2 !important;
+    border-color: #E8E7E2;
+}
+input[type=checkbox]:active{
+    background-color: #A9A8A2;
+    box-shadow: 0 0 0 0.2rem #E8E7E2 !important;
+    border-color: #E8E7E2;
+}
+input[type="checkbox"]:not(:disabled) {
+    box-shadow:inset 1px 1px 0 #E8E7E2, 0 1px 1px #E8E7E2; /*esta me ayudp a sacar un shadow azul que quedaba al desactivar un checkbox, pero no entiendo que hace :c */
+    border-color: #E8E7E2;
+}
+
+/*configuración de los warnings*/
+.warning {
+    
+    color: red;
+    padding-top: 0;
+}
+
+/*un padding a las casillas de check porque quedaban muy corridas*/
+.check {
+    padding-left: 20px;
+}
