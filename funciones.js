@@ -97,7 +97,32 @@ function verif() {
         if (servnull){
             serviciosmod.innerHTML = serv
         } else {
-            serviciosmod.innerHTML = "Sin servicios adicionales"  
-        }              
-    }
+            serviciosmod.innerHTML = "Sin servicios adicionales"
+        }
+
+
+// Obtiene el tipo de habitación seleccionada
+let habitacion = document.getElementById("habitacion").value;
+
+// Establece el precio en base al tipo de habitación
+let precio;
+let tipoHabitacion;
+if (habitacion == "1") {
+    precio = "$50000";
+    tipoHabitacion = "Simple";
+} else if (habitacion == "2") {
+    precio = "$70000";
+    tipoHabitacion = "Doble";
+} else if (habitacion == "3") {
+    precio = "$90000";
+    tipoHabitacion = "Triple";
+} else if (habitacion == "4"){
+    precio = "$120000";
+    tipoHabitacion = "Deluxe";
+}
+// Agrega el precio y el tipo de habitación al modal
+document.getElementById("habitacionmod").innerText = tipoHabitacion;
+document.getElementById("precio").innerText = precio;
+
+}
 }
