@@ -7,16 +7,16 @@ function mayuscula(e){
 
 /*Esta funcion permite indicar error en caso de que la primera fecha sera igual o mayor a la segunda*/
 const parrafo1 = document.getElementById("warningfecha")
-function check() {    
+function check() {
     const fecha1 = document.getElementById("fechainicio").value;
-    const fecha2 = document.getElementById("fechafin").value;                                                  
+    const fecha2 = document.getElementById("fechafin").value;
+    const parrafo1 = document.getElementById("warningfecha")
+
     if (fecha1 >= fecha2) {
-        let warningfecha = "Por favor, ingrese un intervalo válido de fechas"
-        parrafo1.innerHTML = warningfecha             
+        const warningfecha = "Por favor, ingrese un intervalo válido de fechas"
+        parrafo1.textContent = warningfecha
     } else {
-        warningfecha = ""
-        parrafo1.innerHTML = warningfecha
-        
+        parrafo1.textContent = ""
     }
 };
 
@@ -127,8 +127,24 @@ function verif() {
         let tiempoHospedaje = Math.abs(fechaFin - fechaInicio);
         let noches = Math.ceil(tiempoHospedaje / (1000 * 60 * 60 * 24)); // ms a días
 
+        // Valores de servicios adicional (Se agregua un valor un total que no se multiplica pro los dias)
+        let servAdicionales = 0;
+
+        if (desayuno){
+            servAdicionales += 10000;
+        }
+        if (internet){
+            servAdicionales += 5000;
+        }
+        if (agua){
+            servAdicionales += 7000;
+        }
+        if (mascota){
+            servAdicionales += 15000;
+        }
+
         // Calcula el precio total dependiendo de la cantidad de noches
-        let precioTotal = precioPorNoche * noches;
+        let precioTotal = precioPorNoche * noches + servAdicionales;
 
         // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
         document.getElementById("habitacionmod").innerText = tipoHabitacion;
