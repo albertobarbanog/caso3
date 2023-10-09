@@ -71,10 +71,10 @@ const serviciosCheck = () => {
 
     // Arreglo con los servicios, su mensaje y su valor
     const servicios = [
-        { checkbox: desayuno, mensaje: "<li>Desayuno</li>", precio: 10000 },
-        { checkbox: internet, mensaje: "<li>Internet</li>", precio: 5000 },
-        { checkbox: agua, mensaje: "<li>Agua Caliente</li>", precio: 7000 },
-        { checkbox: mascota, mensaje: "<li>Mascotas</li>", precio: 15000 }
+        { checkbox: desayuno, mensaje: "<li>Desayuno $10.000</li>", precio: 10000 },
+        { checkbox: internet, mensaje: "<li>Internet $5.000</li>", precio: 5000 },
+        { checkbox: agua, mensaje: "<li>Agua Caliente $7.000</li>", precio: 7000 },
+        { checkbox: mascota, mensaje: "<li>Mascotas $15.000</li>", precio: 15000 }
     ];
 
     let servicioMesagge = ""
@@ -115,7 +115,7 @@ const habitacionSeleccionada = () => {
         tipoHabitacion = "Deluxe";
     }
 
-    habitacionModal.innerText = tipoHabitacion;
+    habitacionModal.innerText = tipoHabitacion + " $" + precioPorNoche.toLocaleString('es-CL');
     return precioPorNoche;
 }
 
