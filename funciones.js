@@ -133,6 +133,12 @@ const calculoNoches = () => {
     return noches
 }
 
+// funcion para cambiar el formato de fecha
+function formatDateToDDMMYYYY(dateString) {
+    const dateObj = new Date(dateString);
+    return dateObj.toLocaleDateString('es-CL'); // 'es-CL' es para el formato chileno
+}
+
 const modalFunction = () => {
 
     console.log("Entra a modalFunction");
@@ -145,7 +151,9 @@ const modalFunction = () => {
 
     /*aca obtengo las fechas indicadas*/
     console.log("fechaInicio", fechaInicio.value, "fechaFin", fechaFin.value);
-    fechaModal.innerText = "desde " + fechaInicio.value + " hasta " + fechaFin.value;
+    let fechaInicioFormatted = formatDateToDDMMYYYY(fechaInicio.value);
+    let fechaFinFormatted = formatDateToDDMMYYYY(fechaFin.value);
+    fechaModal.innerText = "Desde el " + fechaInicioFormatted + "\n Hasta el " + fechaFinFormatted;
 
     // llamado a la función que muestra los servicios seleccionados
     serviciosCheck();
