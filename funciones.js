@@ -47,7 +47,7 @@ function verif() {
             }
         }
     
-    /*este if indica que si todo esta bien se abra el modal de la reserva*/    
+    /*este if indica que si todo esta bien se abra el modal de la reserva*/
     if (correcto) {
         const sonucModal = document.getElementById("modalreserva");
         const modalEl = new bootstrap.Modal(sonucModal);
@@ -102,27 +102,36 @@ function verif() {
 
 
 // Obtiene el tipo de habitación seleccionada
-let habitacion = document.getElementById("habitacion").value;
+        let habitacion = document.getElementById("habitacion").value;
 
-// Establece el precio en base al tipo de habitación
-let precio;
-let tipoHabitacion;
-if (habitacion == "1") {
-    precio = "$50000";
-    tipoHabitacion = "Simple";
-} else if (habitacion == "2") {
-    precio = "$70000";
-    tipoHabitacion = "Doble";
-} else if (habitacion == "3") {
-    precio = "$90000";
-    tipoHabitacion = "Triple";
-} else if (habitacion == "4"){
-    precio = "$120000";
-    tipoHabitacion = "Deluxe";
-}
-// Agrega el precio y el tipo de habitación al modal
-document.getElementById("habitacionmod").innerText = tipoHabitacion;
-document.getElementById("precio").innerText = precio;
+        // Establece el precio en base al tipo de habitación
+        let precioPorNoche;
+        let tipoHabitacion;
+        if (habitacion == "1") {
+            precioPorNoche = 50000; // precio en números para facilitar el cálculo
+            tipoHabitacion = "Simple";
+        } else if (habitacion == "2") {
+            precioPorNoche = 70000;
+            tipoHabitacion = "Doble";
+        } else if (habitacion == "3") {
+            precioPorNoche = 90000;
+            tipoHabitacion = "Triple";
+        } else if (habitacion == "4"){
+            precioPorNoche = 120000;
+            tipoHabitacion = "Deluxe";
+        }
 
-}
+        // Obtiene las fechas e incrementa el numero de noches
+        let fechaInicio = new Date(document.getElementById("fechainicio").value);
+        let fechaFin = new Date(document.getElementById("fechafin").value);
+        let tiempoHospedaje = Math.abs(fechaFin - fechaInicio);
+        let noches = Math.ceil(tiempoHospedaje / (1000 * 60 * 60 * 24)); // ms a días
+
+        // Calcula el precio total dependiendo de la cantidad de noches
+        let precioTotal = precioPorNoche * noches;
+
+        // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
+        document.getElementById("habitacionmod").innerText = tipoHabitacion;
+        document.getElementById("precio").innerText = "$" + precioTotal;
+    }
 }
