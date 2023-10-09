@@ -29,24 +29,24 @@ function verif() {
     var correcto = false; /*parametro que inicia falso y solo si esta todo correcto pasa a verdadero*/
     if (nombre.value.length < 1){
         warning = "Por favor, ingrese un nombre para realizar la reserva";
-        parrafo2.innerHTML = warning;  
-        } else {
-            correcto = true;                    
-            warning ="";
-            parrafo2.innerHTML = warning;
-            var fecha1 = document.getElementById("fechainicio").value;
-            var fecha2 = document.getElementById("fechafin").value;   
-            if (fecha1 >= fecha2) {
+        parrafo2.innerHTML = warning;
+    } else {
+        correcto = true;
+        warning ="";
+        parrafo2.innerHTML = warning;
+        var fecha1 = document.getElementById("fechainicio").value;
+        var fecha2 = document.getElementById("fechafin").value;
+        if (fecha1 >= fecha2) {
             let warningfecha = "Por favor, ingrese un intervalo válido de fechas";
             parrafo1.innerHTML = warningfecha;
             correcto = false;
-            } else {
-                warningfecha = "";
-                parrafo1.innerHTML = warningfecha;
-                correcto = true;              
-            }
+        } else {
+            warningfecha = "";
+            parrafo1.innerHTML = warningfecha;
+            correcto = true;
         }
-    
+    }
+
     /*este if indica que si todo esta bien se abra el modal de la reserva*/
     if (correcto) {
         const sonucModal = document.getElementById("modalreserva");
@@ -65,7 +65,7 @@ function verif() {
 
         /*aca obtengo las fechas indicadas*/
         let fechaprimera = document.getElementById("fechainicio").value;
-        let fechasegunda = document.getElementById("fechafin").value; 
+        let fechasegunda = document.getElementById("fechafin").value;
         let fechas = "desde " + fechaprimera + " hasta " + fechasegunda
         fechamod.innerText = fechas
 
@@ -76,24 +76,24 @@ function verif() {
         let agua = document.getElementById("agua").checked;
         let mascota = document.getElementById("mascota").checked;
         let serv = ""
-        
+
         let servnull = false; /*inicia como falso y solo añadira texto si algún campo esta checkeado*/
         if (desayuno){
-            serv += "Desayuno <br>"  
-            servnull=true;                  
+            serv += "Desayuno <br>"
+            servnull=true;
         }
         if (internet){
             serv += "Internet <br>"
-            servnull=true;                    
+            servnull=true;
         }
         if (agua){
             serv += "Agua Caliente<br>"
-            servnull=true;                    
+            servnull=true;
         }
         if (mascota){
             serv += "Mascotas <br>"
-            servnull=true;                    
-        } 
+            servnull=true;
+        }
         if (servnull){
             serviciosmod.innerHTML = serv
         } else {
