@@ -1,153 +1,159 @@
+// get document elements
+const fechaInicio = document.getElementById("fechainicio");
+const fechaFin = document.getElementById("fechafin");
+const warnigFechaMesagge = document.getElementById("warnigFechaMesagge")
+const warningNombre = document.getElementById("warningnombre");
+const warningHabitacion = document.getElementById("warninghabitacion");
 
+/*estas constantes permiten luego modificar los parrafos dentro del modal*/
+const nombreModal = document.getElementById("nombreModal")
+const fechaModal = document.getElementById("fechaModal")
+const habitacionModal = document.getElementById("habitacionModal")
+const serviciosModal = document.getElementById("serviciosModal")
+let nombreinput = document.getElementById("nombre")
+
+// servicios
+let desayuno = document.getElementById("desayuno");
+let internet = document.getElementById("internet");
+let agua = document.getElementById("agua");
+let mascota = document.getElementById("mascota");
+
+let habitacion = document.getElementById("habitacion");
 
 /*Esta funcion vuelve mayúsucla la primera letra*/
-function mayuscula(e){
-    e.value = e.value[0].toUpperCase() + e.value.slice(1);
+function mayuscula(e) {
+    if (e.value !== "") {
+        e.value = e.value[0].toUpperCase() + e.value.slice(1);
+    }
 };
 
 /*Esta funcion permite indicar error en caso de que la primera fecha sera igual o mayor a la segunda*/
-const parrafo1 = document.getElementById("warningfecha")
-function check() {
-    const fecha1 = document.getElementById("fechainicio").value;
-    const fecha2 = document.getElementById("fechafin").value;
-    const parrafo1 = document.getElementById("warningfecha")
-
-    if (fecha1 >= fecha2) {
-        const warningfecha = "Por favor, ingrese un intervalo válido de fechas"
-        parrafo1.textContent = warningfecha
+function checkFecha() {
+    if (!fechaInicio.value || !fechaFin.value) {
+        console.log("Entra a checkFecha");
+        warnigFechaMesagge.innerText = "Por favor, ingrese un intervalo válido de fechas"
+    } else if (fechaInicio.value >= fechaFin.value) {
+        warnigFechaMesagge.innerText = "La fecha de inicio debe ser menor a la fecha de fin"
     } else {
-        parrafo1.textContent = ""
+        warnigFechaMesagge.innerText = ""
+        return true;
     }
 };
 
-/*Esta función actua al apretar el boton enviar, se revisa que esten los datos correctos
-y luego si es asi abre el modal con las los datos de la reserva*/
-let warning ="";
-const parrafo2 = document.getElementById("warningnombre");
-const parrafo3 = document.getElementById("warninghabitacion");
-function verif() {
-    var correcto = false; /*parametro que inicia falso y solo si esta todo correcto pasa a verdadero*/
-    if (nombre.value.length < 1){
+/*aca se revisa que el nombre no este vacio*/
+function checkName() {
+    let warning = "";
+    if (nombre.value.length < 1) {
         warning = "Por favor, ingrese un nombre para realizar la reserva";
-        parrafo2.innerHTML = warning;  
-        } else {
-            correcto = true;                    
-            warning ="";
-            parrafo2.innerHTML = warning;
-            var fecha1 = document.getElementById("fechainicio").value;
-            var fecha2 = document.getElementById("fechafin").value;   
-            if (fecha1 >= fecha2) {
-            let warningfecha = "Por favor, ingrese un intervalo válido de fechas";
-            parrafo1.innerHTML = warningfecha;
-            correcto = false;
-            } else {
-                warningfecha = "";
-                parrafo1.innerHTML = warningfecha;
-                correcto = true;              
-            }
-        }
-    
-    /*este if indica que si todo esta bien se abra el modal de la reserva*/
-    if (correcto) {
-        const sonucModal = document.getElementById("modalreserva");
-        const modalEl = new bootstrap.Modal(sonucModal);
-        modalEl.show();
-
-        /*estas constantes permiten luego modificar los parrafos dentro del modal*/
-        const nombremod = document.getElementById("nombremod")
-        const fechamod = document.getElementById("fechamod")
-        const habitacionmod = document.getElementById("habitacionmod")
-        const serviciosmod = document.getElementById("serviciosmod")
-
-        /*aca obtengo el nombre*/
-        let nombreinput =document.getElementById("nombre").value
-        nombremod.innerText = nombreinput
-
-        /*aca obtengo las fechas indicadas*/
-        let fechaprimera = document.getElementById("fechainicio").value;
-        let fechasegunda = document.getElementById("fechafin").value; 
-        let fechas = "desde " + fechaprimera + " hasta " + fechasegunda
-        fechamod.innerText = fechas
-
-        /*Aca verifico si los checkbox estan checked o unchecked, si esta checked el valor de la varianble queda como "true"*/
-
-        let desayuno = document.getElementById("desayuno").checked;
-        let internet = document.getElementById("internet").checked;
-        let agua = document.getElementById("agua").checked;
-        let mascota = document.getElementById("mascota").checked;
-        let serv = ""
-        
-        let servnull = false; /*inicia como falso y solo añadira texto si algún campo esta checkeado*/
-        if (desayuno){
-            serv += "Desayuno <br>"  
-            servnull=true;                  
-        }
-        if (internet){
-            serv += "Internet <br>"
-            servnull=true;                    
-        }
-        if (agua){
-            serv += "Agua Caliente<br>"
-            servnull=true;                    
-        }
-        if (mascota){
-            serv += "Mascotas <br>"
-            servnull=true;                    
-        } 
-        if (servnull){
-            serviciosmod.innerHTML = serv
-        } else {
-            serviciosmod.innerHTML = "Sin servicios adicionales"
-        }
-
-
-// Obtiene el tipo de habitación seleccionada
-        let habitacion = document.getElementById("habitacion").value;
-
-        // Establece el precio en base al tipo de habitación
-        let precioPorNoche;
-        let tipoHabitacion;
-        if (habitacion == "1") {
-            precioPorNoche = 50000; // precio en números para facilitar el cálculo
-            tipoHabitacion = "Simple";
-        } else if (habitacion == "2") {
-            precioPorNoche = 70000;
-            tipoHabitacion = "Doble";
-        } else if (habitacion == "3") {
-            precioPorNoche = 90000;
-            tipoHabitacion = "Triple";
-        } else if (habitacion == "4"){
-            precioPorNoche = 120000;
-            tipoHabitacion = "Deluxe";
-        }
-
-        // Obtiene las fechas e incrementa el numero de noches
-        let fechaInicio = new Date(document.getElementById("fechainicio").value);
-        let fechaFin = new Date(document.getElementById("fechafin").value);
-        let tiempoHospedaje = Math.abs(fechaFin - fechaInicio);
-        let noches = Math.ceil(tiempoHospedaje / (1000 * 60 * 60 * 24)); // ms a días
-
-        // Valores de servicios adicional (Se agregua un valor un total que no se multiplica pro los dias)
-        let servAdicionales = 0;
-
-        if (desayuno){
-            servAdicionales += 10000;
-        }
-        if (internet){
-            servAdicionales += 5000;
-        }
-        if (agua){
-            servAdicionales += 7000;
-        }
-        if (mascota){
-            servAdicionales += 15000;
-        }
-
-        // Calcula el precio total dependiendo de la cantidad de noches
-        let precioTotal = precioPorNoche * noches + servAdicionales;
-
-        // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
-        document.getElementById("habitacionmod").innerText = tipoHabitacion;
-        document.getElementById("precio").innerText = "$" + precioTotal;
+        warningNombre.innerText = warning;
+    } else {
+        warningNombre.innerText = '';
+        return true;
     }
 }
+
+/*Esta función actua al apretar el boton enviar, se revisa que esten los datos correctos
+y luego si es asi abre el modal con las los datos de la reserva*/
+function verificacion() {
+    // let correcto = false; /*parametro que inicia falso y solo si esta todo correcto pasa a verdadero*/
+    // validamos lo que nos retorna la funcion checkName y checkFecha ( true o false )
+    checkName();
+    checkFecha();
+    // checkHabitacion()
+    /*este if indica que si todo esta bien se abra el modal de la reserva*/
+    if (checkName() && checkFecha()) {
+        modalFunction()
+    }
+
+}
+
+const serviciosCheck = () => {
+
+    // Arreglo con los servicios, su mensaje y su valor
+    const servicios = [
+        { checkbox: desayuno, mensaje: "<li>Desayuno</li>", precio: 10000 },
+        { checkbox: internet, mensaje: "<li>Internet</li>", precio: 5000 },
+        { checkbox: agua, mensaje: "<li>Agua Caliente</li>", precio: 7000 },
+        { checkbox: mascota, mensaje: "<li>Mascotas</li>", precio: 15000 }
+    ];
+
+    let servicioMesagge = ""
+    let servicioStatus = false; /*inicia como falso y solo añadira texto si algún campo esta checkeado*/
+    let precioServiciosAdicionales = 0;
+
+    // Recorre el arreglo de servicios y agrega el mensaje y el precio si el checkbox está seleccionado ( si es true )
+    servicios.forEach(servicio => {
+        if (servicio.checkbox.checked) {
+            servicioMesagge += `${servicio.mensaje}`;
+            precioServiciosAdicionales += servicio.precio;
+            servicioStatus = true;
+        }
+    });
+
+    // Mensaje por si no hay servicios seleccionados
+    serviciosModal.innerHTML = servicioStatus ? servicioMesagge : "Sin servicios adicionales"; //If con operador ternario ( condición ? valorSiVerdadero : valorSiFalso; )
+    return precioServiciosAdicionales;
+
+}
+
+const habitacionSeleccionada = () => {
+
+    // Establece el precio en base al tipo de habitación
+    let precioPorNoche;
+    let tipoHabitacion;
+    if (habitacion.value == "1") {
+        precioPorNoche = 50000; // precio en números para facilitar el cálculo
+        tipoHabitacion = "Simple";
+    } else if (habitacion.value == "2") {
+        precioPorNoche = 70000;
+        tipoHabitacion = "Doble";
+    } else if (habitacion.value == "3") {
+        precioPorNoche = 90000;
+        tipoHabitacion = "Triple";
+    } else if (habitacion.value == "4") {
+        precioPorNoche = 120000;
+        tipoHabitacion = "Deluxe";
+    }
+
+    habitacionModal.innerText = tipoHabitacion;
+    return precioPorNoche;
+}
+
+const calculoNoches = () => {
+    // Obtiene las fechas e incrementa el numero de noches
+    let fechaInicio = new Date(document.getElementById("fechainicio").value);
+    let fechaFin = new Date(document.getElementById("fechafin").value);
+    console.log("fechaInicio", fechaInicio, "fechaFin", fechaFin);
+    let tiempoHospedaje = Math.abs(fechaFin - fechaInicio);
+    console.log("tiempoHospedaje", tiempoHospedaje);
+    console.log(tiempoHospedaje / (1000 * 60 * 60 * 24));
+    let noches = Math.ceil(tiempoHospedaje / (1000 * 60 * 60 * 24)); // ms a días
+    return noches
+}
+
+const modalFunction = () => {
+
+    console.log("Entra a modalFunction");
+    const sonucModal = document.getElementById("modalreserva");
+    const modalEl = new bootstrap.Modal(sonucModal);
+    modalEl.show();
+
+    /*aca obtengo el nombre*/
+    nombreModal.innerText = nombreinput.value
+
+    /*aca obtengo las fechas indicadas*/
+    console.log("fechaInicio", fechaInicio.value, "fechaFin", fechaFin.value);
+    fechaModal.innerText = "desde " + fechaInicio.value + " hasta " + fechaFin.value;
+
+    // llamado a la función que muestra los servicios seleccionados
+    serviciosCheck();
+    habitacionSeleccionada();
+    calculoNoches();
+
+    // Calcula el precio total dependiendo de la cantidad de noches
+    let precioTotal = habitacionSeleccionada() * calculoNoches() + serviciosCheck();
+
+    // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
+    document.getElementById("precio").innerText = "$" + precioTotal.toLocaleString('es-CL'); // 'es-CL' es para el formato chileno
+}
+
