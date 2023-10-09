@@ -19,6 +19,7 @@ let agua = document.getElementById("agua");
 let mascota = document.getElementById("mascota");
 
 let habitacion = document.getElementById("habitacion");
+let nocheModal = document.getElementById("nocheModal");
 
 /*Esta funcion vuelve mayúsucla la primera letra*/
 function mayuscula(e) {
@@ -128,6 +129,7 @@ const calculoNoches = () => {
     console.log("tiempoHospedaje", tiempoHospedaje);
     console.log(tiempoHospedaje / (1000 * 60 * 60 * 24));
     let noches = Math.ceil(tiempoHospedaje / (1000 * 60 * 60 * 24)); // ms a días
+    nocheModal.innerHTML = noches;
     return noches
 }
 
@@ -151,7 +153,7 @@ const modalFunction = () => {
     calculoNoches();
 
     // Calcula el precio total dependiendo de la cantidad de noches
-    let precioTotal = habitacionSeleccionada() * calculoNoches() + serviciosCheck();
+    let precioTotal = (habitacionSeleccionada() + serviciosCheck()) * calculoNoches()
 
     // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
     document.getElementById("precio").innerText = "$" + precioTotal.toLocaleString('es-CL'); // 'es-CL' es para el formato chileno
