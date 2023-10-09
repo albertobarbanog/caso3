@@ -3,7 +3,8 @@ const fechaInicio = document.getElementById("fechainicio");
 const fechaFin = document.getElementById("fechafin");
 const warnigFechaMesagge = document.getElementById("warnigFechaMesagge")
 const warningNombre = document.getElementById("warningnombre");
-document.getElementById("warninghabitacion");
+const warningHabitacion = document.getElementById("warninghabitacion");
+
 /*estas constantes permiten luego modificar los parrafos dentro del modal*/
 const nombreModal = document.getElementById("nombreModal")
 const fechaModal = document.getElementById("fechaModal")
@@ -25,7 +26,7 @@ function mayuscula(e) {
     if (e.value !== "") {
         e.value = e.value[0].toUpperCase() + e.value.slice(1);
     }
-}
+};
 
 /*Esta funcion permite indicar error en caso de que la primera fecha sera igual o mayor a la segunda*/
 function checkFecha() {
@@ -38,7 +39,7 @@ function checkFecha() {
         warnigFechaMesagge.innerText = ""
         return true;
     }
-}
+};
 
 /*aca se revisa que el nombre no este vacio*/
 function checkName() {
@@ -101,16 +102,16 @@ const habitacionSeleccionada = () => {
     // Establece el precio en base al tipo de habitación
     let precioPorNoche;
     let tipoHabitacion;
-    if (habitacion.value === "1") {
+    if (habitacion.value == "1") {
         precioPorNoche = 50000; // precio en números para facilitar el cálculo
         tipoHabitacion = "Simple";
-    } else if (habitacion.value === "2") {
+    } else if (habitacion.value == "2") {
         precioPorNoche = 70000;
         tipoHabitacion = "Doble";
-    } else if (habitacion.value === "3") {
+    } else if (habitacion.value == "3") {
         precioPorNoche = 90000;
         tipoHabitacion = "Triple";
-    } else if (habitacion.value === "4") {
+    } else if (habitacion.value == "4") {
         precioPorNoche = 120000;
         tipoHabitacion = "Deluxe";
     }
