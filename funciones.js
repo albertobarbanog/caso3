@@ -103,10 +103,10 @@ const habitacionSeleccionada = () => {
     let precioPorNoche;
     let tipoHabitacion;
     if (habitacion.value == "1") {
-        precioPorNoche = 50000; // precio en números para facilitar el cálculo
+        precioPorNoche = 30000; // precio en números para facilitar el cálculo
         tipoHabitacion = "Simple";
     } else if (habitacion.value == "2") {
-        precioPorNoche = 70000;
+        precioPorNoche = 60000;
         tipoHabitacion = "Doble";
     } else if (habitacion.value == "3") {
         precioPorNoche = 90000;
