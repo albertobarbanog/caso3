@@ -1,9 +1,10 @@
-// get document elements
+// Elementos
 const fechaInicio = document.getElementById("fechainicio");
 const fechaFin = document.getElementById("fechafin");
 const warnigFechaMesagge = document.getElementById("warnigFechaMesagge")
 const warningNombre = document.getElementById("warningnombre");
 const warningHabitacion = document.getElementById("warninghabitacion");
+
 
 /*estas constantes permiten luego modificar los parrafos dentro del modal*/
 const nombreModal = document.getElementById("nombreModal")
@@ -33,8 +34,10 @@ function checkFecha() {
     if (!fechaInicio.value || !fechaFin.value) {
         console.log("Entra a checkFecha");
         warnigFechaMesagge.innerText = "Por favor, ingrese un intervalo válido de fechas"
-    } else if (fechaInicio.value >= fechaFin.value) {
+    } else if (new Date(fechaInicio.value) >= new Date(fechaFin.value)) {
         warnigFechaMesagge.innerText = "La fecha de inicio debe ser menor a la fecha de fin"
+    } else if (new Date(fechaInicio.value) <= new Date()) {
+        warnigFechaMesagge.innerText = "La fecha de inicio debe ser mayor a la fecha actual"
     } else {
         warnigFechaMesagge.innerText = ""
         return true;
@@ -103,10 +106,10 @@ const habitacionSeleccionada = () => {
     let precioPorNoche;
     let tipoHabitacion;
     if (habitacion.value == "1") {
-        precioPorNoche = 50000; // precio en números para facilitar el cálculo
+        precioPorNoche = 30000; // precio en números para facilitar el cálculo
         tipoHabitacion = "Simple";
     } else if (habitacion.value == "2") {
-        precioPorNoche = 70000;
+        precioPorNoche = 60000;
         tipoHabitacion = "Doble";
     } else if (habitacion.value == "3") {
         precioPorNoche = 90000;
@@ -166,4 +169,3 @@ const modalFunction = () => {
     // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
     document.getElementById("precio").innerText = "$" + precioTotal.toLocaleString('es-CL'); // 'es-CL' es para el formato chileno
 }
-
