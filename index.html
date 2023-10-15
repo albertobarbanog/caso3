@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documents</title>
+    <title>Gran Hostal Chile</title>
     <link rel="stylesheet" href="assets/style/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -12,10 +12,10 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light nav-background">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand mx-5 " href="#">
-                    <img src="assets/img/LogoClaro-removebg-preview.png" alt="Logo del Gran Hostal Chile" height="120">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/img/GHC.png" alt="Logo del Gran Hostal Chile" height="120">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -24,12 +24,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="contenidonav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item nav-hover">
-                            <a class="nav-link active text text-light nav-hover" aria-current="page" href="#">Inicio</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-light nav-hover" aria-current="page" href="#">Haz tu
-                                reserva</a>
+                            <a class="nav-link active" aria-current="page" href="#">Haz tu reserva</a>
                         </li>
                     </ul>
                 </div>
@@ -37,189 +36,164 @@
         </nav>
     </header>
     <main>
-        <div class="d-flex">
-            <div>
-                <img src="assets/img/Sur.jpg" alt="Logo del Gran Hostal Chile" height="" class="">
+        <div class="formulario">
+            <div class="container pt-5">
+                <p class="text-center">
+                    En Gran Hostal Chile, nuestro compromiso es hacer que tu viaje sea inolvidable desde el momento en
+                    que decides reservar tu hospedaje.
+                    Nos enorgullecemos de ofrecer una experiencia de reserva sin complicaciones y una amplia variedad de
+                    opciones de alojamiento para satisfacer tus necesidades y presupuesto.
+                </p>
+                <br>
+                <p>
+                <h5 class="text-center">Rellena el formulario a continuación para realizar tu reserva de forma fácil y
+                    rápida.</h5>
+                </p>
             </div>
-            <div class="formulario">
-                <div class="container pt-5">
-                    <p class="text-center">
-                        En Gran Hostal Chile, nuestro compromiso es hacer que tu viaje sea inolvidable desde el momento
-                        en
-                        que decides reservar tu hospedaje.
-                        Nos enorgullecemos de ofrecer una experiencia de reserva sin complicaciones y una amplia
-                        variedad de
-                        opciones de alojamiento para satisfacer tus necesidades y presupuesto.
-                    </p>
-                    <br>
-                    <p>
-                    <h5 class="text-center">Rellena el formulario a continuación para realizar tu reserva de forma fácil
-                        y
-                        rápida.</h5>
-                    </p>
+            <form action="" class="container p-4 flex-grow-1" id="form">
+                <div class="mx-auto d-flex justify-content-center">
+                    <label for="nombre" class="col-form-label col-sm-2">Nombre Completo</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="nombre" onkeyup="mayuscula(this);">
+                    </div>
                 </div>
-                <form action="" class="container p-4 flex-grow-1" id="form">
-                    <div class="mx-auto d-flex justify-content-center">
-                        <label for="nombre" class="col-form-label col-sm-2">Nombre Completo</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="nombre" onkeyup="mayuscula(this);">
+                <div>
+                    <p class="warning col-sm-12 text-center" id="warningnombre"> </p>
+                </div>
+                <div class="mt-3 mx-auto d-flex justify-content-center">
+                    <div class="col-sm-2 p-0">
+                        <label for="fechainicio" class="col-form-label">Fecha Hospedaje</label>
+                    </div>
+                    <div class="d-flex col-sm-6 p-0">
+                        <div class="col-sm-5">
+                            <input type="date" class="form-control" id="fechainicio" onchange="checkFecha()">
+                        </div>
+                        <div class="col-sm-2 d-flex justify-content-center">
+                            <label for="fechafin" class="col-form-label">al</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="date" class="form-control" id="fechafin" onchange="checkFecha()">
                         </div>
                     </div>
-                    <div>
-                        <p class="warning col-sm-12 text-center" id="warningnombre"> </p>
+                </div>
+                <div>
+                    <p class="warning col-sm-12 text-center" id="warnigFechaMesagge"> </p>
+                </div>
+                <div class="mt-3 mx-auto d-flex justify-content-center">
+                    <div class="col-sm-2">
+                        <label for="habitacion" class="col-form-label">Tipo de Habitación</label>
                     </div>
-                    <div class="mt-3 mx-auto d-flex justify-content-center">
-                        <div class="col-sm-2 p-0">
-                            <label for="fechainicio" class="col-form-label">Fecha Hospedaje</label>
-                        </div>
-                        <div class="d-flex col-sm-6 p-0">
-                            <div class="col-sm-5">
-                                <input type="date" class="form-control" id="fechainicio" onchange="checkFecha()">
+                    <div class="col-sm-6">
+                        <select class="form-select" aria-label="Default select example" id="habitacion">
+                            <option selected value="0">Seleccione tipo de habitación</option>
+                            <option value="1">Simple</option>
+                            <option value="2">Doble</option>
+                            <option value="3">Triple</option>
+                            <option value="4">Deluxe</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <p class="warning col-sm-12 text-center" id="warninghabitacion"> </p>
+                </div>
+                <div class="mt-3 mx-auto d-flex col-sm-8">
+                    <label for="serviciosModal" class="form-check-label mb-3">Seleccione los servicios adicionales que
+                        desee</label>
+                </div>
+                <div class="mx-auto col-sm-9 check">
+                    <div class="form-check px-5">
+                        <input class="form-check-input" type="checkbox" value="1" id="desayuno">
+                        <label class="form-check-label" for="desayuno">
+                            Desayuno
+                        </label>
+                    </div>
+                    <div class="form-check px-5">
+                        <input class="form-check-input" type="checkbox" value="2" id="internet">
+                        <label class="form-check-label" for="internet">
+                            Internet
+                        </label>
+                    </div>
+                    <div class="form-check px-5">
+                        <input class="form-check-input" type="checkbox" value="3" id="agua">
+                        <label class="form-check-label" for="agua">
+                            Agua Caliente
+                        </label>
+                    </div>
+                    <div class="form-check px-5">
+                        <input class="form-check-input" type="checkbox" value="4" id="mascota">
+                        <label class="form-check-label" for="mascota">
+                            Mascotas
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center my-4">
+                    <button id="botonver" class="btn btn-primary" type="button" data-bs-toggle="modal"
+                        onclick="verificacion();">Enviar</button>
+                </div>
+                <div class="modal fade" id="modalreserva" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Confirmación de la Reserva</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                            <div class="col-sm-2 d-flex justify-content-center">
-                                <label for="fechafin" class="col-form-label">al</label>
-                            </div>
-                            <div class="col-sm-5">
-                                <input type="date" class="form-control" id="fechafin" onchange="checkFecha()">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="warning col-sm-12 text-center" id="warnigFechaMesagge"> </p>
-                    </div>
-                    <div class="mt-3 mx-auto d-flex justify-content-center">
-                        <div class="col-sm-2">
-                            <label for="habitacion" class="col-form-label">Tipo de Habitación</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <select class="form-select" aria-label="Default select example" id="habitacion">
-                                <option selected value="0">Seleccione tipo de habitación</option>
-                                <option value="1">Simple</option>
-                                <option value="2">Doble</option>
-                                <option value="3">Triple</option>
-                                <option value="4">Deluxe</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="warning col-sm-12 text-center" id="warninghabitacion"> </p>
-                    </div>
-                    <div class="mt-3 mx-auto d-flex col-sm-8">
-                        <label for="" class="form-check-label mb-3">Seleccione los servicios adicionales que
-                            desee</label>
-                    </div>
-                    <div class="mx-auto col-sm-9 check">
-                        <div class="form-check px-5">
-                            <input class="form-check-input" type="checkbox" value="1" id="desayuno">
-                            <label class="form-check-label" for="desayuno">
-                                Desayuno
-                            </label>
-                        </div>
-                        <div class="form-check px-5">
-                            <input class="form-check-input" type="checkbox" value="2" id="internet">
-                            <label class="form-check-label" for="internet">
-                                Internet
-                            </label>
-                        </div>
-                        <div class="form-check px-5">
-                            <input class="form-check-input" type="checkbox" value="3" id="agua">
-                            <label class="form-check-label" for="agua">
-                                Agua Caliente
-                            </label>
-                        </div>
-                        <div class="form-check px-5">
-                            <input class="form-check-input" type="checkbox" value="4" id="mascota">
-                            <label class="form-check-label" for="mascota">
-                                Mascotas
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mb-3 d-flex justify-content-center my-4">
-                        <button id="botonver" class="btn btn-primary" type="button" data-bs-toggle="modal"
-                            onclick="verificacion();">Enviar</button>
-                    </div>
-                    <div class="modal fade" id="modalreserva" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Confirmación de la Reserva</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                            <div class="modal-body">
+                                <p class="text-center">Estos son los datos de su reserva</p>
+                                <div class="row">
+                                    <div class="col-5">Nombre: </div>
+                                    <div class="col-7">
+                                        <p id="nombreModal"></p>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <p class="text-center">Estos son los datos de su reserva</p>
-                                    <div class="row">
-                                        <div class="col-5">Nombre: </div>
-                                        <div class="col-7">
-                                            <p id="nombreModal"></p>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-5">Fecha Hospedaje:</div>
+                                    <div class="col-7">
+                                        <p id="fechaModal"></p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-5">Fecha Hospedaje:</div>
-                                        <div class="col-7">
-                                            <p id="fechaModal"></p>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">Noches:</div>
+                                    <div class="col-7">
+                                        <p id="nocheModal"></p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-5">Noches:</div>
-                                        <div class="col-7">
-                                            <p id="nocheModal"></p>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">Tipo de Habitación:</div>
+                                    <div class="col-7">
+                                        <p id="habitacionModal"></p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-5">Tipo de Habitación:</div>
-                                        <div class="col-7">
-                                            <p id="habitacionModal"></p>
-                                        </div>
-                                    </div>
+                                </div>
 
-                                    <div class="row">
-                                        <div class="col-5">Servicios Adicionales:</div>
-                                        <div class="col-7">
-                                            <ul id="serviciosModal"></ul>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-5">Servicios Adicionales:</div>
+                                    <div class="col-7">
+                                        <ul id="serviciosModal"></ul>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-5">Precio Total:</div>
-                                        <div class="col-7">
-                                            <p id="precio"></p>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">Precio Total:</div>
+                                    <div class="col-7">
+                                        <p id="precio"></p>
                                     </div>
-                                    <p class="text-center mt-3">¿Desea continuar?</p>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary">Reservar</button>
-                                </div>
+                                <p class="text-center mt-3">¿Desea continuar?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Reservar</button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+
         </div>
 
     </main>
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md">
-                    <img src="assets/img/GHC.png" alt="" width="24" height="24">
-                    <small class="d-block mb-3 text-muted">© 2023 Gran Hostal Chile</small>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Contacto</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Dirección: Monjitas 537, Santiago, Chile</a></li>
-                        <li><a class="text-muted" href="#">Teléfono: +56 2 1234567</a></li>
-                        <li><a class="text-muted" href="#">Correo: info@granhostalchile.cl</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 
+    <script src="funciones.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -227,7 +201,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
-    <script src="funciones.js"></script>
 </body>
 
 </html>
