@@ -34,8 +34,10 @@ function checkFecha() {
     if (!fechaInicio.value || !fechaFin.value) {
         console.log("Entra a checkFecha");
         warnigFechaMesagge.innerText = "Por favor, ingrese un intervalo válido de fechas"
-    } else if (fechaInicio.value >= fechaFin.value) {
+    } else if (new Date(fechaInicio.value) >= new Date(fechaFin.value)) {
         warnigFechaMesagge.innerText = "La fecha de inicio debe ser menor a la fecha de fin"
+    } else if (new Date(fechaInicio.value) <= new Date()) {
+        warnigFechaMesagge.innerText = "La fecha de inicio debe ser mayor a la fecha actual"
     } else {
         warnigFechaMesagge.innerText = ""
         return true;
