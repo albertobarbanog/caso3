@@ -70,3 +70,11 @@ input[type="checkbox"]:not(:disabled) {
 .nav-hover:hover {
     color: black !important;
 }
+
+.fix-position {
+    /* margin-left: -20px; */
+}
+
+.succes-msg {
+    background-color: #028d6f;
+}

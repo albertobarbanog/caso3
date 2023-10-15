@@ -10,6 +10,7 @@ const fechaModal = document.getElementById("fechaModal")
 const habitacionModal = document.getElementById("habitacionModal")
 const serviciosModal = document.getElementById("serviciosModal")
 let nombreinput = document.getElementById("nombre")
+let succesReservation = document.getElementById("succesReservation")
 
 // servicios
 let desayuno = document.getElementById("desayuno");
@@ -18,6 +19,7 @@ let agua = document.getElementById("agua");
 let mascota = document.getElementById("mascota");
 
 let habitacion = document.getElementById("habitacion");
+let warningHabitacion = document.getElementById("warningHabitacion");
 let nocheModal = document.getElementById("nocheModal");
 
 /*Esta funcion vuelve mayúsucla la primera letra*/
@@ -52,6 +54,16 @@ function checkName() {
     }
 }
 
+const checkHabitacion = () => {
+    if (habitacion.value === "0") {
+        warningHabitacion.innerText = "Por favor, seleccione una habitación"
+        return false;
+    } else {
+        warningHabitacion.innerText = ""
+        return true;
+    }
+}
+
 /*Esta función actua al apretar el boton enviar, se revisa que esten los datos correctos
 y luego si es asi abre el modal con las los datos de la reserva*/
 function verificacion() {
@@ -59,12 +71,21 @@ function verificacion() {
     // validamos lo que nos retorna la funcion checkName y checkFecha ( true o false )
     checkName();
     checkFecha();
-    // checkHabitacion()
+    checkHabitacion();
     /*este if indica que si todo esta bien se abra el modal de la reserva*/
-    if (checkName() && checkFecha()) {
+    if (checkName() && checkFecha() && checkHabitacion()) {
         modalFunction()
     }
 
+}
+
+const successFunction = () => {
+    succesReservation.classList.remove("d-none");
+    // Elimina el texto de la etiqueta a los 5 segundos
+
+    setTimeout(() => {
+        succesReservation.classList.add("d-none");
+    }, 3000);
 }
 
 const serviciosCheck = () => {
