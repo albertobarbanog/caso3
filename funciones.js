@@ -3,9 +3,24 @@ const fechaInicio = document.getElementById("fechainicio");
 const fechaFin = document.getElementById("fechafin");
 const warnigFechaMesagge = document.getElementById("warnigFechaMesagge")
 const warningNombre = document.getElementById("warningnombre");
-const warningHabitacion = document.getElementById("warninghabitacion");
+document.getElementById("warninghabitacion");
+/*estas constantes permiten luego modificar los parrafos dentro del modal*/
+const nombreModal = document.getElementById("nombreModal")
+const fechaModal = document.getElementById("fechaModal")
+const habitacionModal = document.getElementById("habitacionModal")
+const serviciosModal = document.getElementById("serviciosModal")
+let nombreinput = document.getElementById("nombre")
+let succesReservation = document.getElementById("succesReservation")
 
+// servicios
+let desayuno = document.getElementById("desayuno");
+let internet = document.getElementById("internet");
+let agua = document.getElementById("agua");
+let mascota = document.getElementById("mascota");
 
+let habitacion = document.getElementById("habitacion");
+let warningHabitacion = document.getElementById("warningHabitacion");
+let nocheModal = document.getElementById("nocheModal");
 
 /*Esta funcion vuelve mayúsucla la primera letra*/
 function mayuscula(e){
@@ -13,14 +28,17 @@ function mayuscula(e){
 }
 
 /*Esta funcion permite indicar error en caso de que la primera fecha sera igual o mayor a la segunda*/
-const parrafo1 = document.getElementById("warningfecha")
-function check() {
-    const fecha1 = document.getElementById("fechainicio").value;
-    const fecha2 = document.getElementById("fechafin").value;
-    const parrafo1 = document.getElementById("warningfecha")
 
-    if (fecha1 >= fecha2) {
-        parrafo1.textContent = "Por favor, ingrese un intervalo válido de fechas"
+function checkFecha() {
+    if (!fechaInicio.value || !fechaFin.value) {
+        console.log("Entra a checkFecha");
+        warnigFechaMesagge.innerText = "Por favor, ingrese un intervalo válido de fechas"
+    } else if (new Date(fechaInicio.value) >= new Date(fechaFin.value)) {
+        warnigFechaMesagge.innerText = "La fecha de inicio debe ser menor a la fecha de fin"
+    } else if (new Date(fechaInicio.value) <= new Date()) {
+        warnigFechaMesagge.innerText = "La fecha de inicio debe ser mayor a la fecha actual"
+
+
     } else {
         parrafo1.textContent = ""
     }
@@ -52,56 +70,60 @@ function verif() {
         }
     }
 
+const checkHabitacion = () => {
+    if (habitacion.value === "0") {
+        warningHabitacion.innerText = "Por favor, seleccione una habitación"
+        return false;
+    } else {
+        warningHabitacion.innerText = ""
+        return true;
+    }
+}
+
+/*Esta función actua al apretar el boton enviar, se revisa que esten los datos correctos
+y luego si es asi abre el modal con las los datos de la reserva*/
+function verificacion() {
+    // let correcto = false; /*parametro que inicia falso y solo si esta todo correcto pasa a verdadero*/
+    // validamos lo que nos retorna la funcion checkName y checkFecha ( true o false )
+    checkName();
+    checkFecha();
+    checkHabitacion();
     /*este if indica que si todo esta bien se abra el modal de la reserva*/
-    if (correcto) {
-        const sonucModal = document.getElementById("modalreserva");
-        const modalEl = new bootstrap.Modal(sonucModal);
-        modalEl.show();
+    if (checkName() && checkFecha() && checkHabitacion()) {
+        modalFunction()
+    }
 
-        /*estas constantes permiten luego modificar los parrafos dentro del modal*/
-        const nombremod = document.getElementById("nombremod")
-        const fechamod = document.getElementById("fechamod")
-        document.getElementById("habitacionmod");
-        const serviciosmod = document.getElementById("serviciosmod")
+}
 
-        /*aca obtengo el nombre*/
-        nombremod.innerText = document.getElementById("nombre").value
+const successFunction = () => {
+    succesReservation.classList.remove("d-none");
+    // Elimina el texto de la etiqueta a los 5 segundos
 
-        /*aca obtengo las fechas indicadas*/
-        let fechaprimera = document.getElementById("fechainicio").value;
-        let fechasegunda = document.getElementById("fechafin").value;
-        fechamod.innerText = "desde " + fechaprimera + " hasta " + fechasegunda
+    setTimeout(() => {
+        succesReservation.classList.add("d-none");
+    }, 3000);
+}
 
-        /*Aca verifico si los checkbox estan checked o unchecked, si esta checked el valor de la varianble queda como "true"*/
+const serviciosCheck = () => {
 
-        let desayuno = document.getElementById("desayuno").checked;
-        let internet = document.getElementById("internet").checked;
-        let agua = document.getElementById("agua").checked;
-        let mascota = document.getElementById("mascota").checked;
-        let serv = ""
+    // Arreglo con los servicios, su mensaje y su valor
+    const servicios = [
+        { checkbox: desayuno, mensaje: "<li>Desayuno $10.000</li>", precio: 10000 },
+        { checkbox: internet, mensaje: "<li>Internet $5.000</li>", precio: 5000 },
+        { checkbox: agua, mensaje: "<li>Agua Caliente $7.000</li>", precio: 7000 },
+        { checkbox: mascota, mensaje: "<li>Mascotas $15.000</li>", precio: 15000 }
+    ];
 
-        let servnull = false; /*inicia como falso y solo añadira texto si algún campo esta checkeado*/
-        if (desayuno){
-            serv += "Desayuno <br>"
-            servnull=true;
-        }
-        if (internet){
-            serv += "Internet <br>"
-            servnull=true;
-        }
-        if (agua){
-            serv += "Agua Caliente<br>"
-            servnull=true;
-        }
-        if (mascota){
-            serv += "Mascotas <br>"
-            servnull=true;
-        }
-        if (servnull){
-            serviciosmod.innerHTML = serv
-        } else {
-            serviciosmod.innerHTML = "Sin servicios adicionales"
-        }
+    let servicioMesagge = ""
+    let servicioStatus = false; /*inicia como falso y solo añadira texto si algún campo esta checkeado*/
+    let precioServiciosAdicionales = 0;
+
+    // Recorre el arreglo de servicios y agrega el mensaje y el precio si el checkbox está seleccionado ( si es true )
+    servicios.forEach(servicio => {
+        if (servicio.checkbox.checked) {
+            servicioMesagge += `${servicio.mensaje}`;
+            precioServiciosAdicionales += servicio.precio;
+            servicioStatus = true;
 
 
 // Obtiene el tipo de habitación seleccionada
