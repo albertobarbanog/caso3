@@ -1,4 +1,4 @@
-// get document elements
+// Elementos
 const fechaInicio = document.getElementById("fechainicio");
 const fechaFin = document.getElementById("fechafin");
 const warnigFechaMesagge = document.getElementById("warnigFechaMesagge")
@@ -23,13 +23,12 @@ let warningHabitacion = document.getElementById("warningHabitacion");
 let nocheModal = document.getElementById("nocheModal");
 
 /*Esta funcion vuelve mayúsucla la primera letra*/
-function mayuscula(e) {
-    if (e.value !== "") {
-        e.value = e.value[0].toUpperCase() + e.value.slice(1);
-    }
+function mayuscula(e){
+    e.value = e.value[0].toUpperCase() + e.value.slice(1);
 }
 
 /*Esta funcion permite indicar error en caso de que la primera fecha sera igual o mayor a la segunda*/
+
 function checkFecha() {
     if (!fechaInicio.value || !fechaFin.value) {
         console.log("Entra a checkFecha");
@@ -38,23 +37,38 @@ function checkFecha() {
         warnigFechaMesagge.innerText = "La fecha de inicio debe ser menor a la fecha de fin"
     } else if (new Date(fechaInicio.value) <= new Date()) {
         warnigFechaMesagge.innerText = "La fecha de inicio debe ser mayor a la fecha actual"
+
+
     } else {
-        warnigFechaMesagge.innerText = ""
-        return true;
+        parrafo1.textContent = ""
     }
 }
 
-/*aca se revisa que el nombre no este vacio*/
-function checkName() {
-    let warning = "";
-    if (nombre.value.length < 1) {
+/*Esta función actua al apretar el boton enviar, se revisa que esten los datos correctos
+y luego si es asi abre el modal con las los datos de la reserva*/
+let warning ="";
+const parrafo2 = document.getElementById("warningnombre");
+document.getElementById("warninghabitacion");
+function verif() {
+    var correcto = false; /*parametro que inicia falso y solo si esta todo correcto pasa a verdadero*/
+    if (nombre.value.length < 1){
         warning = "Por favor, ingrese un nombre para realizar la reserva";
-        warningNombre.innerText = warning;
+        parrafo2.innerHTML = warning;
     } else {
-        warningNombre.innerText = '';
-        return true;
+        correcto = true;
+        warning ="";
+        parrafo2.innerHTML = warning;
+        var fecha1 = document.getElementById("fechainicio").value;
+        var fecha2 = document.getElementById("fechafin").value;
+        if (fecha1 >= fecha2) {
+            parrafo1.innerHTML = "Por favor, ingrese un intervalo válido de fechas";
+            correcto = false;
+        } else {
+            warningfecha = "";
+            parrafo1.innerHTML = warningfecha;
+            correcto = true;
+        }
     }
-}
 
 const checkHabitacion = () => {
     if (habitacion.value === "0") {
@@ -110,82 +124,55 @@ const serviciosCheck = () => {
             servicioMesagge += `${servicio.mensaje}`;
             precioServiciosAdicionales += servicio.precio;
             servicioStatus = true;
+
+
+// Obtiene el tipo de habitación seleccionada
+        let habitacion = document.getElementById("habitacion").value;
+
+        // Establece el precio en base al tipo de habitación
+        let precioPorNoche;
+        let tipoHabitacion;
+        if (habitacion === "1") {
+            precioPorNoche = 50000; // precio en números para facilitar el cálculo
+            tipoHabitacion = "Simple";
+        } else if (habitacion === "2") {
+            precioPorNoche = 70000;
+            tipoHabitacion = "Doble";
+        } else if (habitacion === "3") {
+            precioPorNoche = 90000;
+            tipoHabitacion = "Triple";
+        } else if (habitacion === "4"){
+            precioPorNoche = 120000;
+            tipoHabitacion = "Deluxe";
         }
-    });
 
-    // Mensaje por si no hay servicios seleccionados
-    serviciosModal.innerHTML = servicioStatus ? servicioMesagge : "Sin servicios adicionales"; //If con operador ternario ( condición ? valorSiVerdadero : valorSiFalso; )
-    return precioServiciosAdicionales;
+        // Obtiene las fechas e incrementa el numero de noches
+        let fechaInicio = new Date(document.getElementById("fechainicio").value);
+        let fechaFin = new Date(document.getElementById("fechafin").value);
+        let tiempoHospedaje = Math.abs(fechaFin - fechaInicio);
+        let noches = Math.ceil(tiempoHospedaje / (1000 * 60 * 60 * 24)); // ms a días
 
-}
+        // Valores de servicios adicional (Se agregua un valor un total que no se multiplica pro los dias)
+        let servAdicionales = 0;
 
-const habitacionSeleccionada = () => {
+        if (desayuno){
+            servAdicionales += 10000;
+        }
+        if (internet){
+            servAdicionales += 5000;
+        }
+        if (agua){
+            servAdicionales += 7000;
+        }
+        if (mascota){
+            servAdicionales += 15000;
+        }
 
-    // Establece el precio en base al tipo de habitación
-    let precioPorNoche;
-    let tipoHabitacion;
-    if (habitacion.value === "1") {
-        precioPorNoche = 50000; // precio en números para facilitar el cálculo
-        tipoHabitacion = "Simple";
-    } else if (habitacion.value === "2") {
-        precioPorNoche = 70000;
-        tipoHabitacion = "Doble";
-    } else if (habitacion.value === "3") {
-        precioPorNoche = 90000;
-        tipoHabitacion = "Triple";
-    } else if (habitacion.value === "4") {
-        precioPorNoche = 120000;
-        tipoHabitacion = "Deluxe";
+        // Calcula el precio total dependiendo de la cantidad de noches
+        let precioTotal = precioPorNoche * noches + servAdicionales;
+
+        // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
+        document.getElementById("habitacionmod").innerText = tipoHabitacion;
+        document.getElementById("precio").innerText = "$" + precioTotal;
     }
-
-    habitacionModal.innerText = tipoHabitacion + " $" + precioPorNoche.toLocaleString('es-CL');
-    return precioPorNoche;
 }
-
-const calculoNoches = () => {
-    // Obtiene las fechas e incrementa el numero de noches
-    let fechaInicio = new Date(document.getElementById("fechainicio").value);
-    let fechaFin = new Date(document.getElementById("fechafin").value);
-    console.log("fechaInicio", fechaInicio, "fechaFin", fechaFin);
-    let tiempoHospedaje = Math.abs(fechaFin - fechaInicio);
-    console.log("tiempoHospedaje", tiempoHospedaje);
-    console.log(tiempoHospedaje / (1000 * 60 * 60 * 24));
-    let noches = Math.ceil(tiempoHospedaje / (1000 * 60 * 60 * 24)); // ms a días
-    nocheModal.innerHTML = noches;
-    return noches
-}
-
-// funcion para cambiar el formato de fecha
-function formatDateToDDMMYYYY(dateString) {
-    const dateObj = new Date(dateString);
-    return dateObj.toLocaleDateString('es-CL'); // 'es-CL' es para el formato chileno
-}
-
-const modalFunction = () => {
-
-    console.log("Entra a modalFunction");
-    const sonucModal = document.getElementById("modalreserva");
-    const modalEl = new bootstrap.Modal(sonucModal);
-    modalEl.show();
-
-    /*aca obtengo el nombre*/
-    nombreModal.innerText = nombreinput.value
-
-    /*aca obtengo las fechas indicadas*/
-    console.log("fechaInicio", fechaInicio.value, "fechaFin", fechaFin.value);
-    let fechaInicioFormatted = formatDateToDDMMYYYY(fechaInicio.value);
-    let fechaFinFormatted = formatDateToDDMMYYYY(fechaFin.value);
-    fechaModal.innerText = "Desde el " + fechaInicioFormatted + "\n Hasta el " + fechaFinFormatted;
-
-    // llamado a la función que muestra los servicios seleccionados
-    serviciosCheck();
-    habitacionSeleccionada();
-    calculoNoches();
-
-    // Calcula el precio total dependiendo de la cantidad de noches
-    let precioTotal = (habitacionSeleccionada() + serviciosCheck()) * calculoNoches()
-
-    // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
-    document.getElementById("precio").innerText = "$" + precioTotal.toLocaleString('es-CL'); // 'es-CL' es para el formato chileno
-}
-
