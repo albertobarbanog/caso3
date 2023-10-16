@@ -188,3 +188,4 @@ const modalFunction = () => {
     // Agrega el precio y el tipo de habitación al modal, formatea el precio a cadena
     document.getElementById("precio").innerText = "$" + precioTotal.toLocaleString('es-CL'); // 'es-CL' es para el formato chileno
 }
+
